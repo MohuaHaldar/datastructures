@@ -103,18 +103,18 @@ public static String reverseStringIter(String input){
 	}	
 	
 }
-public static String replaceCharacter(String input, Character ori, Character fin){
-	String[] splited=input.split("'"+ori+"'");
+public static String replaceCharacter(String input){
+	String[] splited=input.split("\\s+");
 	String replaced="";
 	for(String s: splited){
 		System.out.println(s);
-		replaced+=s+fin;
+		replaced+=s+"%20";
 	}
-	return replaced;
+	return replaced.substring(0, replaced.length()-3);// removing the last '%20' characters
 	
 }
 /***
- * This method removes the duplivate characters from a string without any extra buffers
+ * This method removes the duplicate characters from a string without any extra buffers
  * @param s
  * @return
  */
@@ -151,6 +151,36 @@ public static String removeDuplicates(String s){
 	return s1;
 	
 }
+/***
+ * This method checks if the matrix has 0 as any element, if so, it sets all the elements
+ * in that row and column 0
+ * @param matrix
+ */
+public static void setToZero(int[][] matrix){
+	int [] col=new int[matrix[0].length];
+	int [] row=new int[matrix.length];
+	for(int i=0;i<row.length;i++){
+		for(int j=0;j<col.length;j++){
+			if(matrix[i][j]==0){
+				row[i]=1;
+				col[j]=1;
+				
+			}
+		}
+	}
+	for(int k=0;k<row.length;k++){
+		for(int l=0;l<col.length;l++){
+			if(row[k]==1||col[l]==1){
+				matrix[k][l]=0;
+			}
+			
+		}
+		System.out.println();
+	}
+	
+	
+}
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Scanner sc=new Scanner(System.in);		
@@ -188,14 +218,29 @@ public static String removeDuplicates(String s){
 					String s5=sc.next();
 					System.out.println("The reversed string is "+reverseStringIter(s5));
 					break;
-			case 6: System.out.println("Enter the string, followed by the character to be replaced and replacing character");
-					String ori=sc.next();	
-					String c=sc.next();
-					String r=sc.next();
-					System.out.println("The string after replaced character is "+replaceCharacter(ori, c.charAt(0), r.charAt(0)));
+			case 6: System.out.println("Enter the string");
+					sc.nextLine();
+					String ori=sc.nextLine();	
+					System.out.println("The string after replaced character is "+replaceCharacter(ori));
 					break;
 			case 7: System.out.println("Enter the string with duplicate characters");
 					System.out.println(removeDuplicates(sc.next()));
+					break;
+					
+			case 8: System.out.println("Enter the values of M and N");
+					int M=sc.nextInt();
+					int N=sc.nextInt();
+					int[][] matrix=new int[M][N];
+					System.out.println("Enter the elements of matrix");
+					for(int i=0;i<M;i++){
+						for(int j=0;j<N;j++){
+							matrix[i][j]=sc.nextInt();
+						}
+					}
+					setToZero(matrix);
+					break;
+					
+					
 					
 				
 		}
