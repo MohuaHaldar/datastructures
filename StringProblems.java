@@ -1,4 +1,4 @@
-package interviewpractice;
+package datastructures;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -113,6 +113,44 @@ public static String replaceCharacter(String input, Character ori, Character fin
 	return replaced;
 	
 }
+/***
+ * This method removes the duplivate characters from a string without any extra buffers
+ * @param s
+ * @return
+ */
+public static String removeDuplicates(String s){
+	if(s==null)
+		return null;
+	char[] rev=s.toCharArray();
+	int i=1;
+	while (i<rev.length){
+		int j=0;
+		while(j!=i){
+			if(rev[j]!=rev[i]){
+				
+				j++;
+			}else{
+				rev[i]=0;
+				i++;
+				j=0;
+			}
+		}
+		i++;
+		
+		
+	}
+	String s1="";
+	for(char x: rev){
+		if(x==0){
+			continue;
+		}
+		else{
+			s1+=x;
+		}
+	}
+	return s1;
+	
+}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Scanner sc=new Scanner(System.in);		
@@ -125,6 +163,7 @@ public static String replaceCharacter(String input, Character ori, Character fin
 		System.out.println("4. Reverse by recursion");
 		System.out.println("5. Reverse by iteration");
 		System.out.println("6. Replace character");
+		System.out.println("7. Remove duplicates without extra buffer");
 		int n=sc.nextInt();
 		switch(n){
 			case 1: System.out.println("Enter the string ");
@@ -140,18 +179,24 @@ public static String replaceCharacter(String input, Character ori, Character fin
 			case 3: System.out.println("Enter the input string");
 					String s4=sc.next();
 					countVowelsAndConsonants(s4);
+					break;
 			case 4: System.out.println("Enter the input string to be reversed");
 					String s=sc.next();
 					System.out.println("The reversed string is "+reverseString(s));
+					break;
 			case 5: System.out.println("Enter the input string to be reversed");
 					String s5=sc.next();
 					System.out.println("The reversed string is "+reverseStringIter(s5));
+					break;
 			case 6: System.out.println("Enter the string, followed by the character to be replaced and replacing character");
 					String ori=sc.next();	
 					String c=sc.next();
 					String r=sc.next();
 					System.out.println("The string after replaced character is "+replaceCharacter(ori, c.charAt(0), r.charAt(0)));
-				
+					break;
+			case 7: System.out.println("Enter the string with duplicate characters");
+					System.out.println(removeDuplicates(sc.next()));
+					
 				
 		}
 				
